@@ -232,63 +232,15 @@
     
     // Animate appearance
     //
-    if (self.bounce)
-    {
-        self.isAnimating = YES;
-
-        if ([UIView respondsToSelector:@selector(animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:)]) {
-            [UIView animateWithDuration:self.animationDuration+self.bounceAnimationDuration
-                                  delay:0.0
-                 usingSpringWithDamping:0.6
-                  initialSpringVelocity:4.0
-                                options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseInOut
-                             animations:^
-             {
-                 self.backgroundView.alpha = 1.0;
-                 CGRect frame = self.menuView.frame;
-                 frame.origin.y = -40.0 - self.separatorHeight;
-                 self.menuWrapperView.frame = frame;
-             }
-                             completion:^(BOOL finished)
-             {
-                 self.isAnimating = NO;
-             }];
-
-        } else {
-            [UIView animateWithDuration:self.animationDuration
-                                  delay:0.0
-                                options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseInOut
-                             animations:^
-             {
-                 self.backgroundView.alpha = 1.0;
-                 CGRect frame = self.menuView.frame;
-                 frame.origin.y = -40.0 - self.separatorHeight;
-                 self.menuWrapperView.frame = frame;
-             }
-                             completion:^(BOOL finished)
-             {
-                 self.isAnimating = NO;
-             }];
-
-        }
-    }
-    else
-    {
-        [UIView animateWithDuration:self.animationDuration
-                              delay:0.0
-                            options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseInOut
-                         animations:^
-        {
-            self.backgroundView.alpha = 1.0;
-            CGRect frame = self.menuView.frame;
-            frame.origin.y = -40.0 - self.separatorHeight;
-            self.menuWrapperView.frame = frame;
-        }
-        completion:^(BOOL finished)
-        {
-            self.isAnimating = NO;
-        }];
-    }
+    self.isAnimating = YES;
+    [UIView animateWithDuration:self.animationDuration animations:^{
+        self.backgroundView.alpha = 1.0;
+        CGRect frame = self.menuView.frame;
+        frame.origin.y = -40.0 - self.separatorHeight;
+        self.menuWrapperView.frame = frame;
+    } completion:^(BOOL finished) {
+        self.isAnimating = NO;
+    }];
 }
 
 - (void)showInView:(UIView *)view
