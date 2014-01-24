@@ -217,7 +217,9 @@
     if (REUIKitIsFlatMode() && self.liveBlur) {
         self.toolbar.frame = self.menuWrapperView.bounds;
     }
-    self.containerView.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+    self.containerView.contentSize = CGSizeMake(rect.size.width, self.combinedHeight - 40 - self.separatorHeight);
+    CGFloat navigationBarHeight = self.navigationBar ? self.navigationBar.frame.size.height : 0;
+    self.containerView.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height - navigationBarHeight);
     self.backgroundButton.frame = self.containerView.bounds;
     
     // Add subviews
